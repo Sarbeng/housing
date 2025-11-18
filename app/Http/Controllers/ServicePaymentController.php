@@ -13,7 +13,7 @@ class ServicePaymentController extends Controller
      */
     public function index()
     {
-        $payments = ServicePayment::orderBy('incurred_for_month', 'desc')->get();
+        $payments = ServicePayment::orderBy('service_type', 'desc')->get();
 
         return view('payments.index', compact('payments'));
     }
@@ -25,10 +25,11 @@ class ServicePaymentController extends Controller
     {
         $validated = $request->validate([
             'service_type' => ['required', 'in:bin,cleaning'], // New enum validation
-            'date_paid' => 'required|date',
-            'incurred_for_month' => 'required|date', // Critical for billing
-            'amount_paid' => 'required|numeric|min:0.01',
-            'total_fee_due' => 'required|numeric|min:0.01|gte:amount_paid', // Must be >= amount paid
+            #'date_paid' => 'required|date',
+            #'incurred_for_month' => 'required|date', // Critical for billing
+            'contractor_monthly_payment' => 'required|numeric|min:0.01',
+            #'total_fee_due' => 'required|numeric|min:0.01|gte:amount_paid', // Must be >= amount paid
+            'tenant_monthly_payment' => 'required|numeric|min:0.01',
             'description' => 'nullable|string|max:255',
         ]);
 

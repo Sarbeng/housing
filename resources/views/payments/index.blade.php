@@ -1,7 +1,24 @@
 <x-app-layout>
+    
+    {{-- 
+    should take into consideration
+    - service type
+    - amount to be paid to the contractor monthly for the service
+    - how much tenant is to pay monthly for the service (this amount should not be more that the contractor payment)
+    - month the service payment applies to (for billing purposes) 
+    - calculate total amount paid to individual contractor for the year.
+
+
+    - next we should be able to have a table where we can see all payments per tenant logged with edit and delete options.
+    - should be able to see all payments per tenant for each month in a year.
+    - all payments for all tenants grouped by the month and grouped by the service.
+    - i want to have the view split into two where one is for bins and another for cleaning. so we don't display both at the same time.
+    -  
+    --}}
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Service Payments & Expenses') }}
+            {{ __('Service Payments') }}
         </h2>
     </x-slot>
 
@@ -17,12 +34,12 @@
 
             <!-- Add New Payment Card -->
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">Log New Service Payment</h3>
+                <h3 class="text-xl font-bold text-gray-900 mb-4">Create New Service Payment</h3>
                 
                 <form method="POST" action="{{ route('payments.store') }}" class="space-y-4">
                     @csrf
 
-                    <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <!-- Service Type -->
                         <div>
                             <x-input-label for="service_type" :value="__('Service Type')" />
@@ -36,31 +53,31 @@
 
                         <!-- Amount Paid -->
                         <div>
-                            <x-input-label for="amount_paid" :value="__('Paid to Contractor ($)')" />
-                            <x-text-input id="amount_paid" name="amount_paid" type="number" step="0.01" min="0.01" class="mt-1 block w-full" :value="old('amount_paid')" required />
-                            <x-input-error class="mt-2" :messages="$errors->get('amount_paid')" />
+                            <x-input-label for="contractor_monthly_payment" :value="__('Contractor Monthly Amount (GHS)')" />
+                            <x-text-input id="contractor_monthly_payment" name="contractor_monthly_payment" type="number" step="0.01" min="0.01" class="mt-1 block w-full" :value="old('contractor_monthly_payment')" required />
+                            <x-input-error class="mt-2" :messages="$errors->get('contractor_monthly_payment')" />
                         </div>
                         
                         <!-- Total Fee Due -->
                         <div>
-                            <x-input-label for="total_fee_due" :value="__('Fee to Charge Tenants ($)')" />
-                            <x-text-input id="total_fee_due" name="total_fee_due" type="number" step="0.01" min="0.01" class="mt-1 block w-full" :value="old('total_fee_due')" required />
-                            <x-input-error class="mt-2" :messages="$errors->get('total_fee_due')" />
+                            <x-input-label for="tenant_monthly_payment" :value="__('Fee to Charge Tenants (GHS)')" />
+                            <x-text-input id="tenant_monthly_payment" name="tenant_monthly_payment" type="number" step="0.01" min="0.01" class="mt-1 block w-full" :value="old('tenant_monthly_payment')" required />
+                            <x-input-error class="mt-2" :messages="$errors->get('tenant_monthly_payment')" />
                         </div>
 
                         <!-- Date Paid -->
-                        <div>
+                        {{-- <div>
                             <x-input-label for="date_paid" :value="__('Date Paid')" />
                             <x-text-input id="date_paid" name="date_paid" type="date" class="mt-1 block w-full" :value="old('date_paid', now()->format('Y-m-d'))" required />
                             <x-input-error class="mt-2" :messages="$errors->get('date_paid')" />
-                        </div>
+                        </div> --}}
 
                         <!-- Incurred Month -->
-                        <div>
+                        {{-- <div>
                             <x-input-label for="incurred_for_month" :value="__('Applies To Billing Month')" />
                             <x-text-input id="incurred_for_month" name="incurred_for_month" type="date" class="mt-1 block w-full" :value="old('incurred_for_month')" required />
                             <x-input-error class="mt-2" :messages="$errors->get('incurred_for_month')" />
-                        </div>
+                        </div> --}}
                     </div>
 
                     <!-- Description (Full width) -->

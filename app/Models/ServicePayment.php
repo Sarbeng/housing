@@ -20,5 +20,9 @@ class ServicePayment extends Model
         'date_paid' => 'date',
     ];
 
+    public function getContractorYearlyTotalAttribute()
+    {
+        return $this->contractor_monthly_payment * 12;
+    }
 
 }

@@ -10,15 +10,17 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
+
+    // this is just the services and how much they cost and how much should be paid for them so dates aren't relevant
     {
         Schema::create('service_payments', function (Blueprint $table) {
             $table->id();
             $table->enum('service_type', ['bin', 'cleaning']);
-            $table->date('date_paid'); // When the payment was made
-            $table->date('incurred_for_month'); // **CRITICAL FOR BILLING**: The month this fee should be allocated to (e.g., '2025-03-01')
-            $table->decimal('amount_paid', 8, 2); // Amount paid to the contractor
-            $table->decimal('total_fee_due', 8, 2); // Total amount to be collected from tenants
-            $table->text('description')->nullable();
+            #$table->decimal('amount_monthly'); // amount to be paid to the contractor monthly for the service
+            $table->decimal('contractor_monthly_payment', 10, 2);
+            $table->decimal('tenant_monthly_payment', 10, 2);
+            #$table->string('billing_month'); // or $table->date('billing_month');
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }
