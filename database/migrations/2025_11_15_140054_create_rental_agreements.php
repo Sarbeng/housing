@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rental_agreement', function (Blueprint $table) {
+        Schema::create('rental_agreements', function (Blueprint $table) {
             $table->id();
              $table->foreignId('unit_id')->constrained('units')->onDelete('cascade');
             $table->foreignId('tenant_id')->constrained('tenants')->onDelete('cascade');
+            $table->decimal('monthly_rent_amount', 8, 2);
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable(); // rent_expiry date
             $table->timestamps();
