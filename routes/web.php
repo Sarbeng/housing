@@ -21,6 +21,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('/send-sms', [App\Http\Controllers\SmsController::class, 'send_sms'])->name('send.sms');
+
     Route::resource('tenants', TenantController::class);
     Route::resource('rentalAgreement', RentalAgreementController::class);
     Route::resource('units', UnitController::class);

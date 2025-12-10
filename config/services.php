@@ -35,4 +35,13 @@ return [
         ],
     ],
 
+    // config/services.php
+    // ... other services like mailgun, postmark, etc.
+
+    'arkesel' => [
+        'api_key' => env('ARKESEL_API_KEY'),
+        'sender_id' => env('ARKESEL_SENDER_ID'),
+        'test_phone' => env('ARKESEL_TEST_PHONE'),
+    ],
+
 ];
