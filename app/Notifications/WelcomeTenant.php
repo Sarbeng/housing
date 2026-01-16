@@ -35,6 +35,8 @@ class WelcomeTenant extends Notification
     public function toArkesel(object $notifiable): string
     {
         // $notifiable is the model receiving the notification (e.g., the User/Tenant)
-        return "{$this->message}";
+        return
+        #Hello {$notifiable->name},
+        "{$this->message}";
     }
 }
